@@ -1,9 +1,22 @@
 // import { Link, useHistory } from 'react-router-dom';
+import s from 'styled-components';
+
+const Form = s.form`
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  align-items: center;
+  margin: 50px auto;
+  padding: 50px;
+  background-color: palevioletred;
+`;
 
 
 export const Sign = ({email,password,error}) => {
 return (
-<form name="logInForm" className="login__form">
+
+<Form name="logInForm" className="login__form">
+      
     <h3>Log in</h3>
     <label htmlFor="email">E-mail:</label>
     <input
@@ -24,7 +37,9 @@ return (
     {error && <p className="error">{error}</p>}
     <button type="submit">Log in</button>
     {/* <p>Don't have an account? <Link to="/sign-up">Sign up</Link></p> */}
-  </form>
+  
+  </Form>
+  
 )
         
 } 
