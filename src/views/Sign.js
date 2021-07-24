@@ -1,6 +1,7 @@
 // import { Link, useHistory } from 'react-router-dom';
 import s from 'styled-components';
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from 'styled-components';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -8,7 +9,7 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
-const Form = s.form`
+const FormStyle = s.form`
   display: flex;
   flex-direction: column;
   width: 30%;
@@ -16,7 +17,7 @@ const Form = s.form`
   margin: 50px auto;
   padding: 50px 70px 70px;
   border-radius: 4px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6 px 20px 0 rgba(0, 0, 0, 0.19);
   background-color: palevioletred;
 `;
 
@@ -42,7 +43,39 @@ height: 30px;
 export const Sign = ({email,password,error}) => {
 return (
 
-<Form name="logInForm" className="login__form">
+<FormStyle name="logInForm" className="login__form">
+<Formik
+       initialValues={{ email: '', password: '' }}
+       validate={values => {
+         const errors = {};
+         if (!values.email) {
+           errors.email = 'Required';
+         } else if (
+           !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+         ) {
+           errors.email = 'Invalid email address';
+         }
+         return errors;
+       }}
+       onSubmit={(values, { setSubmitting }) => {
+         setTimeout(() => {
+           alert(JSON.stringify(values, null, 2));
+           setSubmitting(false);
+         }, 400);
+       }}
+     >
+       {({ isSubmitting }) => (
+         <Form>
+           <Field type="email" name="email" />
+           <ErrorMessage name="email" component="div" />
+           <Field type="password" name="password" />
+           <ErrorMessage name="password" component="div" />
+           <Button type="submit" disabled={isSubmitting}>
+             Log in
+           </Button>
+         </Form>
+       )}
+     </Formik>
 <GlobalStyle />
     <h3>Log in</h3>
     <label htmlFor="email">E-mail:</label>
@@ -65,7 +98,7 @@ return (
     <Button type="submit">Log in</Button>
     {/* <p>Don't have an account? <Link to="/sign-up">Sign up</Link></p> */}
     
-  </Form>
+  </FormStyle>
   
 )
         
