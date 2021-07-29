@@ -1,7 +1,7 @@
 // import { Link, useHistory } from 'react-router-dom';
 import s from 'styled-components';
 import { createGlobalStyle } from 'styled-components';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form, Field, ErrorMessage, useFormik } from 'formik';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -22,17 +22,17 @@ const FormStyle = s.form`
 `;
 
 const Input = s.input`
-// display: flex;
-// flex-direction: column;
-// align-items: center;
+display: flex;
+flex-direction: column;
+align-items: center;
 width: 50%;
 margin: 10px 0px 15px 0px;
 `
 const Label = s.label`
-// display: flex;
-// flex-direction: column;
-// align-items: center;
-// padding: 15px 0px 10px 0px;
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 15px 0px 10px 0px;
 `
 const Button = s.button `
 width: 52%;
@@ -42,8 +42,10 @@ height: 30px;
 
 export const Sign = ({email,password,error}) => {
 return (
-
 <FormStyle name="logInForm" className="login__form">
+<GlobalStyle/>
+
+<h3>Log in</h3>
 <Formik
        initialValues={{ email: '', password: '' }}
        validate={values => {
@@ -53,7 +55,7 @@ return (
          } else if (
            !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
          ) {
-           errors.email = 'Invalid email address';
+           error.email = 'Invalid emails address';
          }
          return errors;
        }}
@@ -66,9 +68,11 @@ return (
      >
        {({ isSubmitting }) => (
          <Form>
-           <Field type="email" name="email" />
+           <Label htmlFor="email">E-mail:</Label>
+           <Field id="email" type="email" name="email" />
            <ErrorMessage name="email" component="div" />
-           <Field type="password" name="password" />
+           <Label htmlFor="password">Password:</Label>
+           <Field id="password" type="password" name="password" />
            <ErrorMessage name="password" component="div" />
            <Button type="submit" disabled={isSubmitting}>
              Log in
@@ -76,30 +80,26 @@ return (
          </Form>
        )}
      </Formik>
-<GlobalStyle />
-    <h3>Log in</h3>
-    <label htmlFor="email">E-mail:</label>
-    <Input
-      id="email"
-      type="email"
-      value={email}
-      name="email"
+     
+</FormStyle>
+)}
+    // /* <h3>Log in</h3>
+    // <label htmlFor="email">E-mail:</label>
+    // <Input
+    //   id="email"
+    //   type="email"
+    //   value={email}
+    //   name="email"
 
-      required/>
-    <Label htmlFor="password">Password:</Label>
-    <Input
-      id="password"
-      type="password"
-      value={password}
-      name="password"
-      placeholder="Enter password"
-      required/>
-    {error && <p className="error">{error}</p>}
-    <Button type="submit">Log in</Button>
-    {/* <p>Don't have an account? <Link to="/sign-up">Sign up</Link></p> */}
-    
-  </FormStyle>
-  
-)
-        
-} 
+    //   required/>
+    // <Label htmlFor="password">Password:</Label>
+    // <Input
+    //   id="password"
+    //   type="password"
+    //   value={password}
+    //   name="password"
+    //   placeholder="Enter password"
+    //   required/>
+    // error && <p className="error">{error}</p>}
+    // <Button type="submit">Log in</Button>
+    // <p>Don't have an account? <Link to="/sign-up">Sign up</Link></p> 
