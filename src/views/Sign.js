@@ -17,7 +17,7 @@ const FormStyle = s.form`
   margin: 50px auto;
   padding: 50px 70px 70px;
   border-radius: 4px;
-  box-shadow: 6px 6px 7px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
   background-color: palevioletred;
 `;
 
@@ -35,9 +35,13 @@ align-items: center;
 padding: 15px 0px 10px 0px;
 `
 const Button = s.button `
-width: 52%;
+margin: 20px 0;
+width: 77%;
 height: 30px;
 
+`
+const H3 = s.h3 `
+margin: 20px 0px 0px 0px;
 `
 
 export const Sign = ({email,password,error}) => {
@@ -45,7 +49,7 @@ return (
 <FormStyle name="logInForm" className="login__form">
 <GlobalStyle/>
 
-<h3>Log in</h3>
+<H3>Log in</H3>
 <Formik
        initialValues={{ email: '', password: '' }}
        validate={values => {
