@@ -38,7 +38,11 @@ const Button = s.button `
 margin: 20px 0;
 width: 77%;
 height: 30px;
-
+background-color: #000184;
+border-radius: 4px;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
+  color: lightgrey;
+  border: solid 1px #000184;
 `
 const H3 = s.h3 `
 margin: 20px 0px 0px 0px;
