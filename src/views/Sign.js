@@ -17,7 +17,7 @@ const FormStyle = s.form`
   margin: 50px auto;
   padding: 50px 70px 70px;
   border-radius: 4px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6 px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 6px 6px 7px 0px rgba(0, 0, 0, 0.2);
   background-color: palevioletred;
 `;
 
