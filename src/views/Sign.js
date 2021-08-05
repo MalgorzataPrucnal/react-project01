@@ -2,6 +2,8 @@
 import s from 'styled-components';
 import { createGlobalStyle } from 'styled-components';
 import { Formik, Form, Field, ErrorMessage, useFormik } from 'formik';
+import firebase from "firebase";
+// var app = firebase.initializeApp({ ... });
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -17,7 +19,7 @@ const FormStyle = s.form`
   margin: 50px auto;
   padding: 50px 70px 70px;
   border-radius: 4px;
-  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
   background-color: palevioletred;
 `;
 
@@ -40,7 +42,7 @@ width: 77%;
 height: 30px;
 background-color: #000184;
 border-radius: 4px;
-  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
   color: lightgrey;
   border: solid 1px #000184;
 `
