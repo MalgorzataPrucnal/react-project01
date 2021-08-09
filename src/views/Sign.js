@@ -3,7 +3,9 @@ import s from 'styled-components';
 import { createGlobalStyle } from 'styled-components';
 import { Formik, Form, Field, ErrorMessage, useFormik } from 'formik';
 import firebase from "firebase";
-// var app = firebase.initializeApp({ ... });
+import { firebaseConfig } from '../firebase-config';
+import { useState } from 'react';
+firebase.initializeApp(firebaseConfig);
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -50,49 +52,51 @@ const H3 = s.h3 `
 margin: 20px 0px 0px 0px;
 `
 
-export const Sign = ({email,password,error}) => {
-return (
-<FormStyle name="logInForm" className="login__form">
-<GlobalStyle/>
+export const Sign = () => {
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    onSubmit: ({ email, password }) => {
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password)
+        .then(console.log("ok"))
+        .catch((error) => alert(error));
+    },
+  });
 
-<H3>Log in</H3>
-<Formik
-       initialValues={{ email: '', password: '' }}
-       validate={values => {
-         const errors = {};
-         if (!values.email) {
-           errors.email = 'Required';
-         } else if (
-           !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-         ) {
-           error.email = 'Invalid emails address';
-         }
-         return errors;
-       }}
-       onSubmit={(values, { setSubmitting }) => {
-         setTimeout(() => {
-           alert(JSON.stringify(values, null, 2));
-           setSubmitting(false);
-         }, 400);
-       }}
-     >
-       {({ isSubmitting }) => (
-         <Form>
-           <Label htmlFor="email">E-mail:</Label>
-           <Field id="email" type="email" name="email" />
-           <ErrorMessage name="email" component="div" />
-           <Label htmlFor="password">Password:</Label>
-           <Field id="password" type="password" name="password" />
-           <ErrorMessage name="password" component="div" />
-           <Button type="submit" disabled={isSubmitting}>
-             Log in
-           </Button>
-         </Form>
-       )}
-     </Formik>
-     
-</FormStyle>
-)}
+  return (
+    <Formik>
+      <FormStyle onSubmit={formik.handleSubmit}>
+        <GlobalStyle />
+        <H3>Log in</H3>
+        <Label htmlFor="email">E-mail:</Label>
+        <Field
+          id="email"
+          type="email"
+          name="email"
+          onChange={formik.handleChange}
+          value={formik.values.email || ""}
+        />
+        <ErrorMessage name="email" component="div" />
+        <Label htmlFor="password">Password:</Label>
+        <Field
+          id="password"
+          type="password"
+          name="password"
+          onChange={formik.handleChange}
+          value={formik.values.password || ""}
+        />
+        <ErrorMessage name="password" component="div" />
+        <Button type="submit">Log in</Button>
+      </FormStyle>
+    </Formik>
+
+    // </FormStyle>
+  );
+};
     // /* <h3>Log in</h3>
     // <label htmlFor="email">E-mail:</label>
     // <Input
