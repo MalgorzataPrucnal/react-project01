@@ -1,4 +1,5 @@
 // import { Link, useHistory } from 'react-router-dom';
+import '../App.css';
 import s from 'styled-components';
 import { createGlobalStyle } from 'styled-components';
 import { Formik, Form, Field, ErrorMessage, useFormik } from 'formik';
@@ -7,9 +8,11 @@ import { firebaseConfig } from '../firebase-config';
 import { useState } from 'react';
 firebase.initializeApp(firebaseConfig);
 
+
 const GlobalStyle = createGlobalStyle`
   body {
     background-color: #F5F5F5;
+    box-sizing: border-box;
   }
 `
 
@@ -26,31 +29,32 @@ const FormStyle = s.form`
 `;
 
 const Input = s.input`
-display: flex;
-flex-direction: column;
-align-items: center;
-width: 50%;
-margin: 10px 0px 15px 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+  margin: 10px 0px 15px 0px;
 `
 const Label = s.label`
-display: flex;
-flex-direction: column;
-align-items: center;
-padding: 15px 0px 10px 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px 0px 10px 0px;
 `
-const Button = s.button `
-margin: 20px 0;
-width: 77%;
-height: 30px;
-background-color: #000184;
-border-radius: 4px;
+const Button = s.button`
+  margin: 10px 0px;
+  width: 177px;
+  height: 30px;
+  background-color: #000184;
+  border-radius: 4px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
   color: lightgrey;
   border: solid 1px #000184;
-`
-const H3 = s.h3 `
-margin: 20px 0px 0px 0px;
-`
+`;
+
+const H3 = s.h3`
+  margin: 20px 0px 0px 0px;
+`;
 
 export const Sign = () => {
   const formik = useFormik({
@@ -91,6 +95,8 @@ export const Sign = () => {
         />
         <ErrorMessage name="password" component="div" />
         <Button type="submit">Log in</Button>
+        <Label htmlFor="signUp">Don't have an account?</Label>
+        <Button type="" name="signUp">Sign up</Button>
       </FormStyle>
     </Formik>
 
