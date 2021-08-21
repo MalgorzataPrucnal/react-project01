@@ -8,7 +8,6 @@ import { firebaseConfig } from '../firebase-config';
 import { useState } from 'react';
 firebase.initializeApp(firebaseConfig);
 
-
 const GlobalStyle = createGlobalStyle`
   body {
     background-color: #F5F5F5;
