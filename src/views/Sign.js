@@ -5,7 +5,7 @@ import { createGlobalStyle } from 'styled-components';
 import { Formik, Form, Field, ErrorMessage, useFormik } from 'formik';
 import firebase from "firebase";
 import { firebaseConfig } from '../firebase-config';
-import { useState } from 'react';
+import React, { useState } from 'react';
 firebase.initializeApp(firebaseConfig);
 
 const GlobalStyle = createGlobalStyle`
@@ -94,11 +94,16 @@ export const Sign = () => {
         />
         <ErrorMessage name="password" component="div" />
         <Button type="submit">Log in</Button>
-        <Label htmlFor="signUp">Don't have an account?</Label>
-        <Button type="" name="signUp">Sign up</Button>
-      </FormStyle>
-    </Formik>
 
+      
+      <p>Don't have an account?  <a href="#">Sign up</a> </p> 
+  
+        {/* <a href="" onClick="">
+        Click me
+      </a> */}
+    
+    </FormStyle>
+    </Formik>
     // </FormStyle>
   );
 };
