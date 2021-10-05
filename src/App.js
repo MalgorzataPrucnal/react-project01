@@ -1,14 +1,25 @@
 
 import './App.css';
-import {Sign} from './views/Sign'
-import {Basic} from './views/SignFormik'
+import {LogIn} from './views/LogIn'
+import {SignUp} from './views/SignUp'
+import { HashRouter as Router, Route, Switch } from "react-router-dom"
 
 function App() {
   return (
-    <div className="App">
-      <Sign />
-    </div>
+    <Router>
+    <Route>
+    {/* <div className="App">
+      <SignIn />
+    </div> */}
+    <Switch>
+    <Route exact path="/" component={LogIn} />
+      <Route path="/SignUp" component={SignUp} />
+      <Route path="/LogIn" component={LogIn} />
+    </Switch>
+    </Route>
+    </Router>
   );
 }
 
+ 
 export default App;

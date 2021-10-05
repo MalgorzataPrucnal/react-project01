@@ -6,7 +6,8 @@ import { Formik, Form, Field, ErrorMessage, useFormik } from 'formik';
 import firebase from "firebase";
 import { firebaseConfig } from '../firebase-config';
 import React, { useState } from 'react';
-firebase.initializeApp(firebaseConfig);
+import {Link} from 'react-router-dom';
+// firebase.initializeApp(firebaseConfig);
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -55,7 +56,7 @@ const H3 = s.h3`
   margin: 20px 0px 0px 0px;
 `;
 
-export const Sign = () => {
+export const LogIn = () => {
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -95,8 +96,7 @@ export const Sign = () => {
         <ErrorMessage name="password" component="div" />
         <Button type="submit">Log in</Button>
 
-      
-      <p>Don't have an account?  <a href="#">Sign up</a> </p> 
+      <p>Don't have an account? <Link to="/SignUp.js">Sign Up</Link></p>
   
         {/* <a href="" onClick="">
         Click me
